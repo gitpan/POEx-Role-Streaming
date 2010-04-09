@@ -1,0 +1,30 @@
+---
+abstract: 'Encapsulated streaming behavior from one handle to another'
+author:
+  - 'Nicholas Perez <nperez@cpan.org>'
+build_requires:
+  File::Temp: 0
+  IO::All: 0
+  POE: 0
+  Test::More: 0
+  Text::Lorem: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+generated_by: 'Dist::Zilla version 2.100922'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: POEx-Role-Streaming
+recommends: {}
+requires:
+  MooseX::Declare: 0
+  MooseX::Types::Moose: 0
+  POE::Filter::Stream: 0
+  POE::Wheel::ReadWrite: 0
+  POEx::Role::SessionInstantiation: 0
+  POEx::Types: 0
+  aliased: 0
+resources:
+  repository: git://github.com/nperez/poex-role-streaming.git
+version: 1.100990
