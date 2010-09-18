@@ -1,6 +1,6 @@
 package POEx::Role::Streaming;
 BEGIN {
-  $POEx::Role::Streaming::VERSION = '1.100990';
+  $POEx::Role::Streaming::VERSION = '1.102610';
 }
 
 #ABSTRACT: Provides behavior for streaming from one filehandle to another
@@ -8,8 +8,7 @@ BEGIN {
 use MooseX::Declare;
 
 
-role POEx::Role::Streaming
-{
+role POEx::Role::Streaming {
     use POE::Wheel::ReadWrite;
     use POE::Filter::Stream;
     use MooseX::Types::Moose(':all');
@@ -78,8 +77,7 @@ role POEx::Role::Streaming
         handles => [qw/ put shutdown_output flush /],
     );
 
-    method _build_wheel
-    {
+    method _build_wheel {
         POE::Wheel::ReadWrite->new
         (
             Handle          => $self->output_handle,
@@ -95,22 +93,19 @@ role POEx::Role::Streaming
     }
 
 
-    after _start is Event
-    {
+    after _start is Event {
         $self->wheel();
         $self->read_more_input();
         $self->poe->kernel->sig( 'DIE' => 'die_signal');
     }
 
 
-    method read_more_input is Event
-    {
+    method read_more_input is Event {
         1 while not $self->put(($self->get_data_from_input_handle() || return ));
     }
 
 
-    method handle_output_flushed is Event
-    {
+    method handle_output_flushed is Event {
         if($self->reading_complete)
         {
             $self->done_writing();
@@ -123,8 +118,7 @@ role POEx::Role::Streaming
 
 
 
-    method get_data_from_input_handle
-    {
+    method get_data_from_input_handle {
         my $read_bytes = sysread($self->input_handle, my $buffer = '', 4096);
         die "Problems reading from the input_handle: $!" unless defined($read_bytes);
         
@@ -141,8 +135,7 @@ role POEx::Role::Streaming
     }
 
 
-    method done_writing
-    {
+    method done_writing {
         $self->shutdown_output();
         $self->clear_wheel();
         $self->output_handle->close();
@@ -150,21 +143,18 @@ role POEx::Role::Streaming
     }
 
     
-    method done_reading
-    {
+    method done_reading {
         $self->input_handle->close();
         $self->clear_input_handle();
     }
 
 
-    method handle_output_error(Str $action, Int $code, Str $message, WheelID $id) is Event
-    {
+    method handle_output_error(Str $action, Int $code, Str $message, WheelID $id) is Event {
         die "Action '$action' failed with code '$code' and the following message: $message";
     }
 
 
-    method die_signal(Str $signal, HashRef $ex) is Event
-    {
+    method die_signal(Str $signal, HashRef $ex) is Event {
         $self->done_reading();
         $self->done_writing();
     }
@@ -181,12 +171,11 @@ POEx::Role::Streaming - Provides behavior for streaming from one filehandle to a
 
 =head1 VERSION
 
-version 1.100990
+version 1.102610
 
 =head1 SYNOPSIS
 
-    class MyStreamer with POEx::Role::Streaming
-    {
+    class MyStreamer with POEx::Role::Streaming {
         ...
     }
 
@@ -296,7 +285,7 @@ die_signal is our exception handler to which POE delivers DIE signals. By defaul
 
 =head1 AUTHOR
 
-  Nicholas Perez <nperez@cpan.org>
+Nicholas Perez <nperez@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

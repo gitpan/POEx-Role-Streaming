@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution POEx-Role-Streaming,
-version 1.100990:
+version 1.102610:
 
-  Encapsulated streaming behavior from one handle to another
+  Provides behavior for streaming from one filehandle to another
 
 This software is copyright (c) 2010 by Infinity Interactive.
 

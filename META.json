@@ -1,0 +1,52 @@
+{
+   "abstract" : "Provides behavior for streaming from one filehandle to another",
+   "author" : [
+      "Nicholas Perez <nperez@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.102340, CPAN::Meta::Converter version 2.102400",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "POEx-Role-Streaming",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.31"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "MooseX::Declare" : 0,
+            "MooseX::Types::Moose" : 0,
+            "POE::Filter::Stream" : 0,
+            "POE::Wheel::ReadWrite" : 0,
+            "POEx::Role::SessionInstantiation" : 0,
+            "POEx::Types" : 0,
+            "aliased" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "File::Temp" : 0,
+            "IO::All" : 0,
+            "POE" : 0,
+            "Test::More" : 0,
+            "Text::Lorem" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/nperez/poex-role-streaming.git"
+      }
+   },
+   "version" : "1.102610"
+}
+
